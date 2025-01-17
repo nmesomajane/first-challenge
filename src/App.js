@@ -3,48 +3,7 @@ import  React,{ useEffect, useState} from 'react';
 // import logo from './logo.svg';
 import './App.css';
 
-// class App extends Component {
-//   constructor() {
-//     super();
 
-//     this.state={
-//       monster:[
-//       ]
-      
-//     };
-
-//
-//   componentDidMount() {
-//     console.log('componentDidMount');
-//     fetch('https://jsonplaceholder.typicode.com/users')
-//     .then((response)=> response.json)
-//     .then((users) =>
-//     this.setState(
-//       ()=>{
-//         return{ monsters:users};
-//       },
-//       () =>{
-//         console.log(this.state)
-//       }
-//     ))
-//   }
-
-
-//   render(){
-//     return (
-//     <div className="App">
-//       <input className='searchbox' type='search' placeholder='search monster' onchange={(event)=>{}}></input>
-//      {
-//       this.state.monster.map((monster)=>{
-//         return <div key={monster.id}> <h1>{monster.name}</h1></div>
-//       })
-//      }
-     
-//     </div>
-//    );
-//   }
-  
-// }
 
 const ToDo = () => {
   const [catchVal, setCatchval] = useState('')
@@ -57,11 +16,20 @@ const ToDo = () => {
   const [filter,setFilter] =useState('all')
 
   useEffect(()=> {
-    localStorage.setItem('Todos',JSON.stringify(taskList))
-  }[taskList])
+    localStorage.setItem('Todos',JSON.stringify(tasklist))
+  },[tasklist])
 
   const addTodos = (e) =>{
     e.preventDefault()
+      
+    const newTask ={
+      id: Date.now() +"" ,
+      task: catchVal
+    }
+
+    setTaskList([newTask, ...tasklist])
+
+    setCatchval("")
 
     if(catchVal.trim() === ""){
       alert("Add a task")
@@ -69,8 +37,8 @@ const ToDo = () => {
     }
 
     if(isEdit){
-      const updatedList = taskList.map((item,i) =>{
-         return i === editTaskIndex ? { ...item, task:catchVal} :item
+      const updatedList = tasklist.map((item,i) =>{
+         return i === editTaskindex ? { ...item, task:catchVal} :item
       })
 
       setTaskList(updatedList)
@@ -87,15 +55,15 @@ const ToDo = () => {
 
     
 
-    setTaskList([newTask,...taskList]) 
+    setTaskList([newTask,...tasklist]) 
 
     setCatchval('')
   }
-  const deleteTask = (id)=>{
+  const deleteTask = (item)=>{
     const confirmDelete =window.confirm('Are you sure you want to delete this ${item.task} permanently') 
     if(confirmDelete){
-      constupdatedlist =FileList.filter((task) =>task.id !== item.id)
-      setTaskList(updatedList)
+      const updatedlist =FileList.filter((task) =>task.id !== item.id)
+      setTaskList(updatedlist)
     }
   }
 
@@ -106,8 +74,8 @@ const ToDo = () => {
 
   }
   const toggleStatus =(id) => {
-      const updatedList = tasklist.map((item) =>{
-        item.id === id ?{...item,status: item.status === 'pending' ? "complete" :'pending'} : item})
+      const updatedList = tasklist.map((item) =>
+        item.id === id ?{...item,status: item.status === 'pending' ? "complete" :'pending'} : item)
         setTaskList(updatedList)
   }
   const filteredList = tasklist.filter((item)=>{
@@ -142,7 +110,7 @@ const ToDo = () => {
               <input  
               type='checkbox' 
               checked = {item.status === 'completed'}
-              onChange={()=> togglestatus(item.id)} ></input>
+              onChange={()=> toggleStatus(item.id)} ></input>
             </div>
             <div className='todo'>
               <span style={{textdecoration: item.status === "complete" ? 'line-trough': 'none'}}> {item.span}</span>
@@ -172,4 +140,4 @@ const ToDo = () => {
   )
 }
 
-export default toDo;
+export default ToDo;
