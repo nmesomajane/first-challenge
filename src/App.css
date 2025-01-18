@@ -5,6 +5,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: sans-serif;
+  background-color: rgb(169, 189, 229);
 }
 
 .container{
@@ -12,24 +13,33 @@
   margin: 70px auto;
   padding: 25px;
   border: 1px solid #111;
+  border-radius: 8px;
 }
 form{
   text-align: center;
 }
 
-form input {
+form > input {
   padding: 10px;
   max-width: 300px;
   width: 100%;
   outline: none;
   font-size: 17px;
+  border: 1px solid gray;
+  border-radius: 8px;
 }
 
-form button{
+form > button{
   padding: 10px;
   font-size: 17px;
   margin-left: 10px;
   cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background-color: rgb(87, 198, 192);
+}
+form > button:hover{
+  background-color: rgb(54, 163, 157);
 }
 
 .compen{
@@ -48,6 +58,10 @@ form button{
   font-size: 17px;
   cursor: pointer;
   border-radius: 5px;
+}
+
+.compen button:hover{
+  scale: 1.1;
 }
 
 .compen button:nth-child(1){
