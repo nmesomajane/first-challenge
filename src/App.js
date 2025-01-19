@@ -55,6 +55,7 @@ const ToDo = () => {
     if (confirmDelete) {
       const updatedlist = tasklist.filter((task) => task.id !== item.id);
       setTaskList(updatedlist);
+      localStorage.setItem("Todos", JSON.stringify(updatedlist));
     }
   };
 
@@ -132,10 +133,7 @@ const ToDo = () => {
                   <button className="edit" onClick={() => editTask(item.id)}>
                     Edit
                   </button>
-                  <button
-                    className="delete"
-                    onClick={() => deleteTask(item.id)}
-                  >
+                  <button className="delete" onClick={() => deleteTask(item)}>
                     Delete
                   </button>
                 </div>
